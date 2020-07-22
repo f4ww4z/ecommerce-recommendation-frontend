@@ -32,6 +32,10 @@
     background-color: #681300;
     cursor: pointer;
   }
+
+  :global(.w-100) {
+    width: 100%;
+  }
 </style>
 
 <Nav {segment}/>

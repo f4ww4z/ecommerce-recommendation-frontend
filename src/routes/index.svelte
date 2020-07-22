@@ -1,3 +1,7 @@
+<svelte:head>
+  <title>Home | E-Commerce</title>
+</svelte:head>
+
 <script>
   import ProductTiles from '../components/ProductTiles.svelte'
 
@@ -6,7 +10,7 @@
 
 <script context="module">
   import fetch from 'node-fetch'
-  import { BASE_URL, headersWithToken } from '../util/Constants.js'
+  import { BASE_URL, jsonHeaders } from '../util/Constants.js'
 
   export async function preload (page, session) {
     const { token } = session
@@ -14,7 +18,7 @@
 
     const res = await fetch(`${BASE_URL}/products`, {
       method: 'GET',
-      headers: headersWithToken({ token: token }),
+      headers: jsonHeaders({ token: token }),
     })
     const parsed = await res.json()
 
@@ -25,6 +29,7 @@
     return { products: parsed }
   }
 </script>
+
 <style>
   h1 {
     text-align: center;
@@ -41,10 +46,6 @@
     height: 300px;
   }
 </style>
-
-<svelte:head>
-  <title>E-Commerce</title>
-</svelte:head>
 
 <h1>E-Commerce app</h1>
 

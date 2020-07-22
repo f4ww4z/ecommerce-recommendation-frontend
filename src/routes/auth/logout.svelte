@@ -4,11 +4,11 @@
 
   onMount(async () => {
     try {
-      const res = await fetch('/token', { method: 'DELETE' })
+      const res = await fetch('/auth/token', { method: 'DELETE' })
       const result = await res.json()
       console.log(result)
 
-      goto('/login')
+      goto('/auth/login')
       window.location.reload()
     } catch (e) {
       console.log(e.message)

@@ -1,5 +1,5 @@
 import fetch from 'node-fetch'
-import { BASE_URL, headersWithToken } from '../util/Constants'
+import { BASE_URL, jsonHeaders } from '../../util/Constants'
 
 export async function post (req, res) {
   try {
@@ -7,7 +7,7 @@ export async function post (req, res) {
 
     const response = await fetch(`${BASE_URL}/token`, {
       method: 'POST',
-      headers: headersWithToken({}),
+      headers: jsonHeaders({}),
       body: JSON.stringify({ username, password }),
     })
 

@@ -72,7 +72,7 @@
         <li>
           <a rel="prefetch"
              aria-current={segment === 'logout' ? 'page' : undefined}
-             href="logout">
+             href="auth/logout">
             Log out
           </a>
         </li>
@@ -80,14 +80,14 @@
         <li>
           <a rel="prefetch"
              aria-current={segment === 'login' ? 'page' : undefined}
-             href="login">
+             href="/auth/login">
             Log in
           </a>
         </li>
         <li>
           <a rel="prefetch"
              aria-current={segment === 'register' ? 'page' : undefined}
-             href="register">
+             href="/auth/register">
             Register
           </a>
         </li>

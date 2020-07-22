@@ -1,7 +1,11 @@
+<svelte:head>
+  <title>Login | E-Commerce</title>
+</svelte:head>
+
 <script>
   import { stores, goto } from '@sapper/app'
-  import FlexBreak from '../components/helpers/FlexBreak.svelte'
-  import { headersWithToken } from '../util/Constants'
+  import FlexBreak from '../../components/helpers/FlexBreak.svelte'
+  import { jsonHeaders } from '../../util/Constants'
 
   const { session } = stores()
 
@@ -11,9 +15,9 @@
 
   const handleSubmit = async () => {
 
-    const response = await fetch('/token', {
+    const response = await fetch('/auth/token', {
       method: 'POST',
-      headers: headersWithToken({}),
+      headers: jsonHeaders({}),
       body: JSON.stringify({ username, password })
     })
 
