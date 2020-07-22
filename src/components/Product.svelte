@@ -1,6 +1,6 @@
 <script>
   // create a prop
-  export let product;
+  export let product
 </script>
 
 <style>

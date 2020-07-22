@@ -1,5 +1,9 @@
 <script>
-  export let segment;
+  import { stores } from '@sapper/app'
+
+  export let segment
+
+  const { session } = stores()
 </script>
 
 <style>
@@ -7,6 +11,8 @@
     border-bottom: 1px solid rgba(255, 62, 0, 0.1);
     font-weight: 300;
     padding: 0 1em;
+    display: flex;
+    justify-content: space-between;
   }
 
   ul {
@@ -52,28 +58,39 @@
   <ul>
     <li>
       <a aria-current={segment === undefined ? 'page' : undefined} href=".">
-        home
+        Home
       </a>
     </li>
     <li>
       <a aria-current={segment === 'about' ? 'page' : undefined} href="about">
-        about
+        About
       </a>
     </li>
-
-    <!-- for the blog link, we're using rel=prefetch so that Sapper prefetches
-		     the blog data when we hover over the link or tap it on a touchscreen -->
-    <li>
-      <a
-        rel="prefetch"
-        aria-current={segment === 'blog' ? 'page' : undefined}
-        href="blog">
-        Log in
-      </a>
-    </li>
-
-    <li>
-      <a href="register">Register</a>
-    </li>
+  </ul>
+  <ul>
+      {#if !!$session.token}
+        <li>
+          <a rel="prefetch"
+             aria-current={segment === 'logout' ? 'page' : undefined}
+             href="logout">
+            Log out
+          </a>
+        </li>
+      {:else}
+        <li>
+          <a rel="prefetch"
+             aria-current={segment === 'login' ? 'page' : undefined}
+             href="login">
+            Log in
+          </a>
+        </li>
+        <li>
+          <a rel="prefetch"
+             aria-current={segment === 'register' ? 'page' : undefined}
+             href="register">
+            Register
+          </a>
+        </li>
+      {/if}
   </ul>
 </nav>

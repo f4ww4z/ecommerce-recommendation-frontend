@@ -1,7 +1,30 @@
 <script>
-  import ProductTiles from "../components/ProductTiles.svelte";
+  import ProductTiles from '../components/ProductTiles.svelte'
+
+  export let products = []
 </script>
 
+<script context="module">
+  import fetch from 'node-fetch'
+  import { BASE_URL, headersWithToken } from '../util/Constants.js'
+
+  export async function preload (page, session) {
+    const { token } = session
+    // console.log(token)
+
+    const res = await fetch(`${BASE_URL}/products`, {
+      method: 'GET',
+      headers: headersWithToken({ token: token }),
+    })
+    const parsed = await res.json()
+
+    if (parsed.error) {
+      return this.error(res.status, parsed.error)
+    }
+
+    return { products: parsed }
+  }
+</script>
 <style>
   h1 {
     text-align: center;
@@ -27,4 +50,4 @@
 
 <div class="banner">Big Banner</div>
 
-<ProductTiles/>
+<ProductTiles products={products}/>

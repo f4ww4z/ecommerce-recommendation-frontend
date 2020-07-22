@@ -1,16 +1,9 @@
 <script>
-  import {onMount} from "svelte";
-  import Product from "./Product.svelte";
-  import {BASE_URL} from "../util/Constants.js";
+  import Product from './Product.svelte'
 
-  let products;
-
-  onMount(async () => {
-    let res = await fetch(`${BASE_URL}/products`);
-    products = await res.json();
-    console.log(products);
-  });
+  export let products
 </script>
+
 
 <style>
   .root {
@@ -23,7 +16,7 @@
 {#if products}
   <div class="root">
       {#each products as product}
-          <Product {product}/>
+        <Product {product}/>
       {/each}
   </div>
 {:else}
