@@ -2,6 +2,8 @@
   import Product from './Product.svelte'
 
   export let products
+
+  // console.log(products)
 </script>
 
 
@@ -9,7 +11,7 @@
   .root {
     display: flex;
     flex-flow: row wrap;
-    justify-content: space-evenly;
+    justify-content: center;
   }
 </style>
 

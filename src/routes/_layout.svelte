@@ -1,7 +1,27 @@
 <script>
   import Nav from '../components/Nav.svelte'
+  import { stores } from '@sapper/app'
+  import { onMount } from 'svelte'
+  import { jsonHeaders } from '../util/Constants'
 
   export let segment
+
+  const { session } = stores()
+  onMount(async () => {
+    // Only refresh when signed in
+    if (!!$session.token) {
+      const res = await fetch('/auth/refresh', {
+        method: 'POST',
+        headers: jsonHeaders({}),
+      })
+
+      const result = await res.json()
+      const { token } = result
+      console.log('refreshed')
+      console.log(result)
+      $session.token = token
+    }
+  })
 </script>
 
 <style>
@@ -31,6 +51,10 @@
   :global(.btn:hover) {
     background-color: #681300;
     cursor: pointer;
+  }
+
+  :global(.btn:disabled) {
+    background-color: #cccccc;
   }
 
   :global(.w-100) {

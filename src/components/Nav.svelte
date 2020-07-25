@@ -1,9 +1,21 @@
 <script>
   import { stores } from '@sapper/app'
+  import jwtDecode from 'jwt-decode'
 
   export let segment
 
   const { session } = stores()
+
+  let jwtToken = ''
+  let username = ''
+
+  session.subscribe(value => {
+    jwtToken = value.token
+    if (!!jwtToken) {
+      username = jwtDecode(jwtToken)['username']
+    }
+  })
+
 </script>
 
 <style>
@@ -52,6 +64,10 @@
     padding: 1em 0.5em;
     display: block;
   }
+
+  .shopping-cart {
+    width: 24px;
+  }
 </style>
 
 <nav>
@@ -68,7 +84,19 @@
     </li>
   </ul>
   <ul>
-      {#if !!$session.token}
+      {#if !!jwtToken}
+        <li>
+          <a href="cart">
+            <img class="shopping-cart" src="/cart.png" alt="shopping cart icon">
+          </a>
+        </li>
+        <li>
+          <a rel="prefetch"
+             aria-current={segment === 'dashboard' ? 'page' : undefined}
+             href="dashboard">
+              {username}
+          </a>
+        </li>
         <li>
           <a rel="prefetch"
              aria-current={segment === 'logout' ? 'page' : undefined}

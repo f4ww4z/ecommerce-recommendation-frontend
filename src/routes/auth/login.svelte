@@ -12,8 +12,10 @@
   let username
   let password
   let error
+  let loading = false
 
   const handleSubmit = async () => {
+    loading = true
 
     const response = await fetch('/auth/token', {
       method: 'POST',
@@ -25,6 +27,7 @@
     if (!!res.error) {
       error = res.error
       console.log(error)
+      loading = false
       return
     }
 
@@ -67,6 +70,8 @@
     <input id="password" bind:value={password} type="password"
            placeholder="Enter password">
     <FlexBreak/>
-    <button class="btn login-button" type="submit">Login</button>
+    <button class="btn login-button" type="submit" disabled="{loading}">
+      Login
+    </button>
   </form>
 </div>
