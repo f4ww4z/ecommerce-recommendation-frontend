@@ -5,7 +5,7 @@
 <script>
   import { stores, goto } from '@sapper/app'
   import FlexBreak from '../../components/helpers/FlexBreak.svelte'
-  import { jsonHeaders } from '../../util/Constants'
+  import { jsonHeaders } from '../server/_helpers'
 
   const { session } = stores()
 
@@ -17,7 +17,7 @@
   const handleSubmit = async () => {
     loading = true
 
-    const response = await fetch('/auth/token', {
+    const response = await fetch('/server/auth/token', {
       method: 'POST',
       headers: jsonHeaders({}),
       body: JSON.stringify({ username, password })

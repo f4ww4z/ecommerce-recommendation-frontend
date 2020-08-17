@@ -2,7 +2,7 @@
   import Nav from '../components/Nav.svelte'
   import { stores } from '@sapper/app'
   import { onMount } from 'svelte'
-  import { jsonHeaders } from '../util/Constants'
+  import { jsonHeaders } from './server/_helpers'
 
   export let segment
 
@@ -10,15 +10,14 @@
   onMount(async () => {
     // Only refresh when signed in
     if (!!$session.token) {
-      const res = await fetch('/auth/refresh', {
+      const res = await fetch('/server/auth/refresh', {
         method: 'POST',
         headers: jsonHeaders({}),
       })
 
       const result = await res.json()
       const { token } = result
-      console.log('refreshed')
-      console.log(result)
+      // console.log(result)
       $session.token = token
     }
   })
@@ -60,6 +59,26 @@
   :global(.w-100) {
     width: 100%;
   }
+
+  @keyframes -global-fadein {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+
+  @keyframes -global-fadeout {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+
 </style>
 
 <Nav {segment}/>

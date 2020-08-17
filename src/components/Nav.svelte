@@ -73,7 +73,9 @@
 <nav>
   <ul>
     <li>
-      <a aria-current={segment === undefined ? 'page' : undefined} href=".">
+      <a rel="prefetch"
+         aria-current={segment === undefined ? 'page' : undefined}
+         href=".">
         Home
       </a>
     </li>
@@ -84,41 +86,41 @@
     </li>
   </ul>
   <ul>
-      {#if !!jwtToken}
-        <li>
-          <a href="cart">
-            <img class="shopping-cart" src="/cart.png" alt="shopping cart icon">
-          </a>
-        </li>
-        <li>
-          <a rel="prefetch"
-             aria-current={segment === 'dashboard' ? 'page' : undefined}
-             href="dashboard">
-              {username}
-          </a>
-        </li>
-        <li>
-          <a rel="prefetch"
-             aria-current={segment === 'logout' ? 'page' : undefined}
-             href="auth/logout">
-            Log out
-          </a>
-        </li>
-      {:else}
-        <li>
-          <a rel="prefetch"
-             aria-current={segment === 'login' ? 'page' : undefined}
-             href="/auth/login">
-            Log in
-          </a>
-        </li>
-        <li>
-          <a rel="prefetch"
-             aria-current={segment === 'register' ? 'page' : undefined}
-             href="/auth/register">
-            Register
-          </a>
-        </li>
-      {/if}
+    {#if !!jwtToken}
+      <li>
+        <a href="cart">
+          <img class="shopping-cart" src="/cart.png" alt="shopping cart icon">
+        </a>
+      </li>
+      <li>
+        <a rel="prefetch"
+           aria-current={segment === 'dashboard' ? 'page' : undefined}
+           href="dashboard">
+          {username}
+        </a>
+      </li>
+      <li>
+        <a rel="prefetch"
+           aria-current={segment === 'logout' ? 'page' : undefined}
+           href="auth/logout">
+          Log out
+        </a>
+      </li>
+    {:else}
+      <li>
+        <a rel="prefetch"
+           aria-current={segment === 'login' ? 'page' : undefined}
+           href="/auth/login">
+          Log in
+        </a>
+      </li>
+      <li>
+        <a rel="prefetch"
+           aria-current={segment === 'register' ? 'page' : undefined}
+           href="/auth/register">
+          Register
+        </a>
+      </li>
+    {/if}
   </ul>
 </nav>

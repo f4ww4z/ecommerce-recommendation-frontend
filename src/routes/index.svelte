@@ -2,23 +2,10 @@
   <title>Home | E-Commerce</title>
 </svelte:head>
 
-<script>
-  import ProductTiles from '../components/ProductTiles.svelte'
-
-  export let products = []
-</script>
-
 <script context="module">
-  import fetch from 'node-fetch'
-  import { BASE_URL, jsonHeaders } from '../util/Constants.js'
-
   export async function preload (page, session) {
-    const { token } = session
-    // console.log(token)
-
-    const res = await fetch(`${BASE_URL}/products`, {
+    const res = await this.fetch(`/server/products`, {
       method: 'GET',
-      headers: jsonHeaders({ token: token }),
     })
     const parsed = await res.json()
 
@@ -28,6 +15,12 @@
 
     return { products: parsed }
   }
+</script>
+
+<script>
+  import ProductTiles from '../components/ProductTiles.svelte'
+
+  export let products = []
 </script>
 
 <style>

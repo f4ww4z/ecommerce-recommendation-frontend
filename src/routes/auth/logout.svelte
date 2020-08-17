@@ -7,7 +7,7 @@
   onMount(async () => {
     try {
       $session.token = ''
-      const res = await fetch('/auth/token', { method: 'DELETE' })
+      const res = await fetch('/server/auth/token', { method: 'DELETE' })
       const result = await res.json()
       console.log(result)
 

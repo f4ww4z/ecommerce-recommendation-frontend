@@ -1,5 +1,5 @@
 import fetch from 'node-fetch'
-import { BASE_URL, jsonHeaders } from '../util/Constants'
+import { BASE_URL, jsonHeaders } from '../../util/Constants'
 
 export async function post (req, res) {
 

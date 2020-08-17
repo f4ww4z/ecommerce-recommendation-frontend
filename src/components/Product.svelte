@@ -14,6 +14,7 @@
 
 <style>
   .root {
+    all: initial;
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
@@ -23,8 +24,18 @@
     background-color: #f0f0f0;
   }
 
+  .root:hover {
+    filter: drop-shadow(0 0 .5rem gray);
+    cursor: pointer;
+    /*animation: fadein 1s;*/
+  }
+
   img {
     width: 100%;
+  }
+
+  h2 {
+    margin-top: 16px;
   }
 
   h4 {
@@ -36,7 +47,7 @@
   }
 </style>
 
-<div class="root">
+<a rel="prefetch" class="root" href="/product/{product.id}">
   <img src="/box.png" alt="box">
   <h2>{product.name}</h2>
   <FlexBreak/>
@@ -45,8 +56,4 @@
   <FlexBreak/>
   <h5>{product.category}</h5>
   <FlexBreak/>
-    {#if $session.token}
-      <div></div>
-      <button class="btn" onclick={handleAddToCart}>Add to Cart</button>
-    {/if}
-</div>
+</a>

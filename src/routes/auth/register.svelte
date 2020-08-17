@@ -17,8 +17,8 @@
   let lastName
   let error = ''
 
-  function isRegisterButtonDisabled () {
-    return password !== confirmPassword || !!error
+  const isRegisterButtonDisabled = () => {
+    return password !== confirmPassword
   }
 
   const handleSubmit = async () => {
@@ -26,7 +26,7 @@
       return
     }
 
-    let response = await fetch('/user', {
+    let response = await fetch('/server/user', {
       method: 'POST',
       headers: jsonHeaders({}),
       body: JSON.stringify({
@@ -44,7 +44,7 @@
     console.log('Successfully registered.')
 
     // Get token and login
-    response = await fetch('/auth/token', {
+    response = await fetch('/server/auth/token', {
       method: 'POST',
       headers: jsonHeaders({}),
       body: JSON.stringify({ username, password })
@@ -126,7 +126,8 @@
     <FlexBreak/>
 
     <button class="btn register-button"
-            type="submit">
+            type="submit"
+            disabled="{isRegisterButtonDisabled()}">
       Register
     </button>
   </form>
